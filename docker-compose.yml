@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:6
+    container_name: mdim_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+
+  redis:
+    image: redis:7
+    container_name: mdim_redis
+    ports:
+      - "6379:6379"
+
+  # mdim-authorization:
+  #   build: ./services/mdim-authorization
+  #   env_file:
+  #     - ./services/mdim-authorization/.env
+  #   ports:
+  #     - "4000:4000"
+  #   depends_on:
+  #     - mongodb
+  #     - redis
+  #   volumes:
+  #     - ./services/mdim-authorization:/app
