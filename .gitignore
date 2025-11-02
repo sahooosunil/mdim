@@ -1,0 +1,146 @@
+# =====================================================
+# 🏗️  GLOBAL SETTINGS
+# =====================================================
+
+# OS / Editor / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment / Secrets
+.env
+.env.*
+*.env.local
+*.secret
+secret.*
+credentials.json
+
+# =====================================================
+# ⚙️  BACKEND SERVICES (Node.js)
+# =====================================================
+
+# Ignore all node_modules and build artifacts inside each service
+services/*/node_modules/
+services/*/dist/
+services/*/build/
+services/*/.env
+services/*/coverage/
+services/*/.cache/
+services/*/.eslintcache
+services/*/tmp/
+services/*/pids/
+services/*/*.pid
+services/*/*.seed
+services/*/*.pid.lock
+services/*/*.log
+
+# Ignore lock files (each service can have its own lockfile)
+services/*/package-lock.json
+services/*/yarn.lock
+services/*/pnpm-lock.yaml
+
+# Ignore archives
+services/*/*.gz
+services/*/*.tgz
+services/*/*.zip
+services/*/*.tar
+
+# =====================================================
+# 🎨  FRONTEND (React - mdim-ui)
+# =====================================================
+
+services/mdim-ui/node_modules/
+services/mdim-ui/build/
+services/mdim-ui/.env
+services/mdim-ui/.cache/
+services/mdim-ui/coverage/
+services/mdim-ui/.eslintcache
+
+# =====================================================
+# 🐳  DOCKER / CONTAINERS
+# =====================================================
+
+.dockerignore
+docker-compose.override.yml
+*.tar
+*.img
+*.pid
+*.sock
+
+# =====================================================
+# ☸️  KUBERNETES / DEPLOYMENT
+# =====================================================
+
+*.yaml~
+*.yml~
+*_local.yaml
+*_dev.yaml
+*.backup.yaml
+*.backup.yml
+temp/
+tmp/
+
+# Local kube configs
+.kube/
+kubeconfig*
+minikube.*
+*.kubeconfig
+
+# =====================================================
+# ☁️  AWS / CLOUD
+# =====================================================
+
+.aws/
+*.pem
+*.key
+*.crt
+*.csr
+*.pub
+*.p12
+*.pfx
+aws-secret.json
+aws-credentials
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+.terraform/
+cdk.out/
+
+# =====================================================
+# 🔄  CI/CD (Jenkins, pipelines)
+# =====================================================
+
+ci-cd/scripts/*.log
+ci-cd/scripts/*.out
+ci-cd/workspace/
+jenkins_home/
+pipeline-logs/
+*.bak
+*.tmp
+
+# =====================================================
+# 📚  DOCUMENTATION / MISC
+# =====================================================
+
+*.md.bak
+docs/tmp/
+docs/drafts/
+notes.txt
+todo.txt
+
+# =====================================================
+# ✅  END
+# =====================================================

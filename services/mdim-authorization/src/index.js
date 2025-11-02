@@ -1,0 +1,1 @@
+// mdim-authorization entry point
