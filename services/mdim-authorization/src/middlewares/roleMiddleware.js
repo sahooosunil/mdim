@@ -6,5 +6,5 @@ function requireRole(role) {
     };
   }
   
-  module.exports = requireRole;
+ export default requireRole;
   

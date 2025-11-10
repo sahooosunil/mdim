@@ -1,18 +1,26 @@
-const { verifyAccessToken } = require('../utils/jwt');
+import { verifyAccessToken } from '../utils/jwt.js';
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
-  if (!authHeader) return res.status(401).json({ message: 'Missing auth header' });
+
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Missing Authorization header' });
+  }
+
   const parts = authHeader.split(' ');
-  if (parts.length !== 2) return res.status(401).json({ message: 'Invalid auth header' });
+  if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    return res.status(401).json({ message: 'Invalid Authorization header format' });
+  }
+
   const token = parts[1];
+
   try {
     const payload = verifyAccessToken(token);
-    req.user = payload; // contains sub, roles, iat, exp, ...
+    req.user = payload.sub; // typically contains user info (id, roles, etc.)
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Invalid token' });
+    return res.status(401).json({ message: 'Invalid or expired token' });
   }
 }
 
-module.exports = authMiddleware;
+export default authMiddleware;

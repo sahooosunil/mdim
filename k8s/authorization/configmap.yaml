@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: mdim-dev
+  name: mdim-authorization
+data:
+  mongo_uri: mongodb://host.docker.internal:27017/mdim_auth
+  redis_uri: redis://host.docker.internal:6379

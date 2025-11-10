@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mdim-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mdim.com
+    http:
+      paths:
+      - path: /mdim-auth(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: mdim-authorization
+            port:
+              number: 4000

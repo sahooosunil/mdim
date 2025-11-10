@@ -1,33 +1,45 @@
-require('dotenv').config();
-const express = require('express');
-const morgan = require('morgan');
-const connectDB = require('./config/db');
-const createRedisClient = require('./config/redis');
-const authRoutes = require('./routes/authRoutes');
+import dotenv from "dotenv";
+dotenv.config(); // ✅ load .env variables
+
+
+import express from 'express';
+import morgan from 'morgan';
+import connectDB from "./config/db.js";
+
+import { createRedisClient } from './config/redis.js';
+import authRoutes from './routes/authRoutes.js';
+import Role from './models/rolesModel.js';
+import globalErrorHandler from './middlewares/globalErrorHandler.js';
 
 const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Connect DB + Redis
+// ✅ Connect MongoDB and Redis
 (async () => {
   try {
     await connectDB(process.env.MONGO_URI);
+
     const redis = createRedisClient(process.env.REDIS_URL);
     await redis.connect();
+
     app.locals.redis = redis;
-    console.log('Redis connected');
+    console.log('✅ Redis connected');
   } catch (err) {
-    console.error('Startup error', err);
+    console.error('❌ Startup error:', err);
     process.exit(1);
   }
 })();
 
-// routes
+// ✅ Routes
 app.use('/auth', authRoutes);
 
-// health
+// ✅ Health check endpoint
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-const port = 4000;
-app.listen(port, () => console.log(`mdim-auth listening on ${port}`));
+// ✅ Global error handler
+app.use(globalErrorHandler);
+
+// ✅ Start server
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`🚀 mdim-auth listening on port ${port}`));

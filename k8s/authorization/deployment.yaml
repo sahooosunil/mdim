@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mdim-authorization
+  labels:
+    app: mdim-authorization
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mdim-authorization
+  template:    # pod section
+    metadata:
+      labels:
+        app: mdim-authorization
+    spec:
+      containers:
+      - name: mdim-authorization-container
+        image: sunilsahu0123/mdim-authorization:4
+        ports:
+        - containerPort: 4000
+        env:
+          - name: MONGO_URI
+            valueFrom:
+              configMapKeyRef:
+                name: mdim-authorization
+                key: mongo_uri
+          - name: REDIS_URL
+            valueFrom:
+              configMapKeyRef:
+                name: mdim-authorization
+                key: redis_uri
+        
